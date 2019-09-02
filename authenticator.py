@@ -33,8 +33,4 @@ data = {
     "content": certbot_validation
 }
 
-
-with open('tmp.json', 'w') as outfile:
-    json.dump(data, outfile)
-
 print(requests.post("%s%s" % (api, path), headers=headers, data=json.dumps(data)).content)

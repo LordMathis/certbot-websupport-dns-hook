@@ -8,11 +8,12 @@ import json
 from datetime import datetime
 
 certbot_auth_output = argv[1]
-apiKey = argv[2]
-secret = argv[3]
+certbot_domain = argv[2]
+apiKey = argv[3]
+secret = argv[4]
 
 method = "GET"
-path = "/v1/user/self/zone/namesny.com/record"
+path = "/v1/user/self/zone/" + certbot_domain + "/record"
 timestamp = int(time.time())
 api = "https://rest.websupport.sk"
 
@@ -26,18 +27,10 @@ headers = {
     "Date": datetime.fromtimestamp(timestamp).isoformat()
 }
 
-res = requests.get("%s%s" % (api, path), headers=headers).content
-res_dict = json.loads(res)
+res_dict = json.loads(certbot_auth_output)
+record_id = res_dict['item']['id']
 
-record_id = None
-
-with open('tmp.json') as json_data:
-    d = json.load(json_data)
-    print d
-
-    for item in res_dict['items']:
-        if item['name'] == d['name'] and item['type'] == 'TXT' and item['content'] == d['content']:
-            record_id = item['id']
+requests.get("%s%s" % (api, path), headers=headers).content
 
 path = path + "/" + str(record_id)
 print requests.delete("%s%s" % (api, path), headers=headers).content

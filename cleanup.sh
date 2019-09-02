@@ -2,5 +2,4 @@
 
 source auth.env
 
-python cleanup.py $CERTBOT_AUTH_OUTPUT $KEY $SECRET
-rm tmp.json
+python cleanup.py $CERTBOT_AUTH_OUTPUT $CERTBOT_DOMAIN $KEY $SECRET

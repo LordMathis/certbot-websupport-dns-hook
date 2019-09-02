@@ -30,6 +30,7 @@ headers = {
 res_dict = json.loads(certbot_auth_output)
 record_id = res_dict['item']['id']
 
+# This GET request is necessary, otherwise you'll get 403 response on the DELETE request
 requests.get("%s%s" % (api, path), headers=headers).content
 
 path = path + "/" + str(record_id)

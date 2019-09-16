@@ -4,7 +4,7 @@ Get Letsencrypt wildcard certificate for your domain managed at [websupport.sk](
 
 ## Requirements
 
-* Python 2.7
+* Python 3
 * [requests](https://2.python-requests.org/en/master/user/install/#install)
 
 ## Usage
@@ -14,8 +14,8 @@ Get Letsencrypt wildcard certificate for your domain managed at [websupport.sk](
   ```
   sudo certbot certonly --manual 
                         --preferred-challenges=dns
-                        --manual-auth-hook ./authenticator.sh
-                        --manual-cleanup-hook ./cleanup.sh
+                        --manual-auth-hook PATH/TO/authenticator.sh
+                        --manual-cleanup-hook PATH/TO/cleanup.sh
                         --manual-public-ip-logging-ok
                         -d "*.example.com
   ```
